@@ -6,6 +6,7 @@ ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "config" / "config.yaml"
 SERVICES_DOC = ROOT / "docs" / "services.md"
 PROBE_POLICY = ROOT / "docs" / "probe-policy.md"
+RUNBOOK = ROOT / "docs" / "runbook.md"
 COMPOSE = ROOT / "docker-compose.yml"
 ENV_EXAMPLE = ROOT / ".env.example"
 
@@ -311,6 +312,41 @@ class EndpointConfigTest(unittest.TestCase):
             "must not imply official government affiliation",
         ):
             self.assertIn(expected, policy)
+
+    def test_runbook_covers_operational_workflows(self):
+        runbook = RUNBOOK.read_text(encoding="utf-8")
+        normalized_runbook = " ".join(runbook.split())
+
+        for expected in (
+            "docker compose up",
+            "docker compose down",
+            "docker compose config",
+            "python -m unittest discover",
+            "http://localhost:8080",
+            "GATUS_PORT",
+            "config/config.yaml",
+            "docs/probe-policy.md",
+            "docs/services.md",
+            "False Positives",
+            "Planned Maintenance And Noisy Endpoints",
+            "00:00 to 06:00",
+            "Europe/Belgrade",
+            "Telegram Alert Test",
+            "TELEGRAM_ALERTS_ENABLED",
+            "TELEGRAM_BOT_TOKEN",
+            "TELEGRAM_CHAT_ID",
+            "Never commit real bot tokens",
+        ):
+            self.assertIn(expected, normalized_runbook)
+
+        for forbidden_behavior in (
+            "login",
+            "form submission",
+            "CAPTCHA bypass",
+            "private data",
+            "high-frequency probing",
+        ):
+            self.assertIn(forbidden_behavior, normalized_runbook)
 
 
 if __name__ == "__main__":

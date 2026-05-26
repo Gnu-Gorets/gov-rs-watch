@@ -19,6 +19,7 @@ The MVP covers:
 - data.gov.rs
 
 Service details and URL choices are documented in `docs/services.md`.
+Operational procedures are documented in `docs/runbook.md`.
 
 ## Local Startup
 

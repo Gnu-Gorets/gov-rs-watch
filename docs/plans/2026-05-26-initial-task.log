@@ -88,13 +88,13 @@ Create a small open-source status page for public availability checks of Serbian
 
 ### Task 8: Add operational runbook
 
-- [ ] Create `docs/runbook.md`.
-- [ ] Document local startup and shutdown.
-- [ ] Document how to validate the Gatus config.
-- [ ] Document how to add, change, or remove a service.
-- [ ] Document how to investigate false positives.
-- [ ] Document how to handle planned maintenance and noisy endpoints.
-- [ ] Document how to test Telegram alert configuration safely.
+- [x] Create `docs/runbook.md`.
+- [x] Document local startup and shutdown.
+- [x] Document how to validate the Gatus config.
+- [x] Document how to add, change, or remove a service.
+- [x] Document how to investigate false positives.
+- [x] Document how to handle planned maintenance and noisy endpoints.
+- [x] Document how to test Telegram alert configuration safely.
 
 ### Task 9: Verify the MVP
 
