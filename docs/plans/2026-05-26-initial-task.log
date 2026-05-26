@@ -73,10 +73,10 @@ Create a small open-source status page for public availability checks of Serbian
 
 ### Task 6: Handle ePorezi known maintenance
 
-- [ ] Check whether Gatus can model the ePorezi known night maintenance window directly.
-- [ ] Configure the maintenance behavior if supported.
-- [ ] If direct configuration is not supported, document the limitation in README and `docs/runbook.md`.
-- [ ] Make clear that expected maintenance should not be treated as a community outage incident.
+- [x] Check whether Gatus can model the ePorezi known night maintenance window directly.
+- [x] Configure the maintenance behavior if supported.
+- [x] If direct configuration is not supported, document the limitation in README and `docs/runbook.md`. (Not applicable: Gatus supports per-endpoint maintenance windows.)
+- [x] Make clear that expected maintenance should not be treated as a community outage incident.
 
 ### Task 7: Write README and probe policy docs
 

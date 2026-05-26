@@ -23,6 +23,21 @@ Validate the Compose file:
 docker compose config
 ```
 
+## Planned Maintenance
+
+The ePorezi electronic services are publicly documented as available from
+06:00 to midnight, and the public maintenance page shows regular daily system
+maintenance from 00:00 to 06:00.
+
+The ePorezi endpoint is configured with a per-endpoint Gatus maintenance window
+from 00:00 to 06:00 in `Europe/Belgrade`. Expected ePorezi unavailability
+during that window should not be treated as a community outage incident.
+
+References:
+
+- https://www.purs.gov.rs/en/E-taxes/Information.html
+- https://eporezi.purs.gov.rs/error/maintenance.htm
+
 ## Telegram Alerts
 
 Telegram alerts are disabled by default so the project can start without local

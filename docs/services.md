@@ -11,7 +11,7 @@ Reviewed source for additional candidates: https://www.srb.guide/
 | eUprava | https://euprava.gov.rs/ | Core e-government | Landing page | Required initial service; the landing page is the safest public indicator for the central e-government portal. |
 | eID.gov.rs | https://eid.gov.rs/ | Identity | Landing page | Required initial service; the landing page checks identity portal availability without entering login or registration flows. |
 | Welcome to Serbia | https://welcometoserbia.gov.rs/ | Immigration | Landing page | Required initial service; the landing page is public and avoids immigration application forms or account areas. |
-| ePorezi | https://eporezi.purs.gov.rs/ | Taxes | Landing page | Required initial service; the public entry point is safer than authenticated tax account pages, certificate flows, or message inboxes. |
+| ePorezi | https://eporezi.purs.gov.rs/ | Taxes | Landing page | Required initial service; the public entry point is safer than authenticated tax account pages, certificate flows, or message inboxes. Regular daily maintenance is configured from 00:00 to 06:00 Europe/Belgrade. |
 | APR | https://www.apr.gov.rs/ | Business | Landing page | Required initial service; the public business registry homepage is safer than online application submission flows. |
 | LPA | https://lpa.gov.rs/jisportal/homepage | Taxes | Public homepage | Required initial service; the public local tax administration homepage avoids taxpayer account or payment workflows. |
 | eKatastar | https://katastar.rgz.gov.rs/eKatastarPublic/ | Property | Public entry point | Required initial service; the public cadastre entry point checks availability without querying private property records. |

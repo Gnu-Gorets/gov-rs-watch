@@ -41,16 +41,25 @@ EXPECTED_TEXT_CONDITIONS = {
 def load_endpoint_config():
     endpoints = {}
     current_endpoint = None
+    current_maintenance_window = None
     in_conditions = False
     in_alerts = False
+    in_maintenance_windows = False
 
     for line in CONFIG.read_text(encoding="utf-8").splitlines():
         if line.startswith("  - name: "):
             name = line.removeprefix("  - name: ")
-            current_endpoint = {"name": name, "conditions": [], "alerts": []}
+            current_endpoint = {
+                "name": name,
+                "conditions": [],
+                "alerts": [],
+                "maintenance-windows": [],
+            }
             endpoints[name] = current_endpoint
+            current_maintenance_window = None
             in_conditions = False
             in_alerts = False
+            in_maintenance_windows = False
             continue
 
         if current_endpoint is None:
@@ -60,22 +69,32 @@ def load_endpoint_config():
             current_endpoint["url"] = line.removeprefix("    url: ")
             in_conditions = False
             in_alerts = False
+            in_maintenance_windows = False
             continue
 
         if line.startswith("    group: "):
             current_endpoint["group"] = line.removeprefix("    group: ")
             in_conditions = False
             in_alerts = False
+            in_maintenance_windows = False
+            continue
+
+        if line == "    maintenance-windows:":
+            in_conditions = False
+            in_alerts = False
+            in_maintenance_windows = True
             continue
 
         if line == "    conditions:":
             in_conditions = True
             in_alerts = False
+            in_maintenance_windows = False
             continue
 
         if line == "    alerts:":
             in_conditions = False
             in_alerts = True
+            in_maintenance_windows = False
             continue
 
         if in_conditions and line.startswith('      - "'):
@@ -86,9 +105,33 @@ def load_endpoint_config():
             current_endpoint["alerts"].append(line.strip().removeprefix("- type: "))
             continue
 
+        if in_maintenance_windows and line.startswith("      - start: "):
+            current_maintenance_window = {
+                "start": line.strip().removeprefix("- start: ").strip('"')
+            }
+            current_endpoint["maintenance-windows"].append(current_maintenance_window)
+            continue
+
+        if (
+            in_maintenance_windows
+            and current_maintenance_window is not None
+            and line.startswith("        duration: ")
+        ):
+            current_maintenance_window["duration"] = line.strip().removeprefix("duration: ")
+            continue
+
+        if (
+            in_maintenance_windows
+            and current_maintenance_window is not None
+            and line.startswith("        timezone: ")
+        ):
+            current_maintenance_window["timezone"] = line.strip().removeprefix("timezone: ")
+            continue
+
         if line and not line.startswith("      "):
             in_conditions = False
             in_alerts = False
+            in_maintenance_windows = False
 
     return endpoints
 
@@ -197,6 +240,32 @@ class EndpointConfigTest(unittest.TestCase):
         for name, endpoint in self.endpoints.items():
             with self.subTest(endpoint=name):
                 self.assertEqual(endpoint["alerts"], ["telegram"])
+
+    def test_eporezi_has_known_night_maintenance_window(self):
+        self.assertEqual(
+            self.endpoints["ePorezi"]["maintenance-windows"],
+            [
+                {
+                    "start": "00:00",
+                    "duration": "6h",
+                    "timezone": "Europe/Belgrade",
+                },
+            ],
+        )
+
+        for name, endpoint in self.endpoints.items():
+            if name != "ePorezi":
+                self.assertEqual(endpoint["maintenance-windows"], [])
+
+    def test_eporezi_maintenance_is_documented(self):
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        services_doc = SERVICES_DOC.read_text(encoding="utf-8")
+
+        for text in (readme, services_doc):
+            self.assertIn("00:00 to 06:00", text)
+            self.assertIn("Europe/Belgrade", text)
+
+        self.assertIn("should not be treated as a community outage incident", readme)
 
 
 if __name__ == "__main__":
