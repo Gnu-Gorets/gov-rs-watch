@@ -1,0 +1,106 @@
+# Build Serbia Gov Status MVP
+
+## Overview
+
+Create a small open-source status page for public availability checks of Serbian e-government services. The MVP should be runnable with Docker Compose, use Gatus as the status page and probe engine, keep checks in YAML config, support Telegram alerts through environment variables, and include clear project documentation.
+
+## Context
+
+- Repository is currently minimal and should become a runnable pet project.
+- Gatus should be used for status page rendering, probes, grouping, and alerting.
+- Checks must target only public pages and must stay low-rate.
+- Do not log in, submit forms, bypass CAPTCHA, scrape private data, or collect personal data.
+- The project is community-run and must not imply official Serbian government affiliation.
+- Public services to include initially: eUprava, eID.gov.rs, Welcome to Serbia, ePorezi, APR, LPA, eKatastar, and data.gov.rs.
+- Additional public service candidates may be selected from https://www.srb.guide only if they fit the probe policy.
+
+## Success Criteria
+
+- `docker compose config` succeeds.
+- `docker compose up` starts Gatus from the repository root.
+- The local status page URL is documented.
+- Initial Serbian e-government services are configured as Gatus endpoints.
+- Services are grouped as Identity, Core e-government, Immigration, Taxes, Business, Property, and Open data.
+- Endpoints validate HTTP success responses and have practical latency thresholds.
+- HTTPS endpoints include TLS certificate expiry validation where Gatus supports it.
+- Stable expected-text checks are used only where they are safe and not fragile.
+- Telegram alerting is configurable through environment variables without committing secrets.
+- ePorezi known night maintenance is configured if supported by Gatus, or documented clearly if not.
+- README, `docs/services.md`, `docs/probe-policy.md`, and `docs/runbook.md` match the implemented configuration.
+
+### Task 1: Add the Gatus Docker Compose setup
+
+- [ ] Add `docker-compose.yml` for running Gatus.
+- [ ] Add a Gatus config file, preferably under `config/`.
+- [ ] Mount the config into the Gatus container.
+- [ ] Expose the Gatus web UI on a documented local port.
+- [ ] Keep generated runtime data and local secrets out of Git.
+- [ ] Run `docker compose config` and fix any Compose errors.
+
+### Task 2: Analyze and configure public Serbian government endpoints
+
+- [ ] Treat eUprava, eID.gov.rs, Welcome to Serbia, ePorezi, APR, LPA, eKatastar, and data.gov.rs as required initial services.
+- [ ] Review https://www.srb.guide for additional Serbian government or public-service websites that are relevant for a public status page.
+- [ ] Select only candidates that expose safe public landing pages or public health-safe URLs.
+- [ ] Exclude candidates that require login, forms, CAPTCHA, session state, private data, or high-frequency probing.
+- [ ] Document selected and rejected candidates in `docs/services.md` with a short reason.
+- [ ] Add Gatus endpoints for the required initial services.
+- [ ] Add Gatus endpoints for any additional selected candidates from the analysis.
+- [ ] Keep the initial MVP focused; do not add marginal or duplicate services just to increase the endpoint count.
+
+### Task 3: Add probe assertions and thresholds
+
+- [ ] Add HTTP success validation for each endpoint.
+- [ ] Add latency thresholds for each endpoint.
+- [ ] Add TLS certificate expiry checks for HTTPS endpoints where Gatus supports it.
+- [ ] Add expected-text checks only for stable public text.
+- [ ] Remove any text checks that are likely to fail due to localization, redirects, cookie banners, or dynamic content.
+
+### Task 4: Group services and document URL choices
+
+- [ ] Assign each endpoint to one of the required groups: Identity, Core e-government, Immigration, Taxes, Business, Property, or Open data.
+- [ ] Create `docs/services.md`.
+- [ ] Document each service name, URL, group, and probe rationale.
+- [ ] Note any service where the safest public URL is a landing page rather than a deep endpoint.
+
+### Task 5: Add Telegram alerting
+
+- [ ] Configure Telegram alerting in Gatus.
+- [ ] Read Telegram token and chat ID from environment variables.
+- [ ] Add `.env.example` or equivalent documentation for required variables.
+- [ ] Ensure no real token, chat ID, or secret is committed.
+- [ ] Document how to enable Telegram alerts locally.
+
+### Task 6: Handle ePorezi known maintenance
+
+- [ ] Check whether Gatus can model the ePorezi known night maintenance window directly.
+- [ ] Configure the maintenance behavior if supported.
+- [ ] If direct configuration is not supported, document the limitation in README and `docs/runbook.md`.
+- [ ] Make clear that expected maintenance should not be treated as a community outage incident.
+
+### Task 7: Write README and probe policy docs
+
+- [ ] Write README with project purpose, community-run status, local startup, Telegram setup, service addition workflow, and probe policy summary.
+- [ ] Create `docs/probe-policy.md`.
+- [ ] Explicitly forbid login, form submission, CAPTCHA bypass, private-data access, and high-frequency probing.
+- [ ] Explain how to choose safe public URLs and stable text checks.
+- [ ] Avoid any language implying official government affiliation.
+
+### Task 8: Add operational runbook
+
+- [ ] Create `docs/runbook.md`.
+- [ ] Document local startup and shutdown.
+- [ ] Document how to validate the Gatus config.
+- [ ] Document how to add, change, or remove a service.
+- [ ] Document how to investigate false positives.
+- [ ] Document how to handle planned maintenance and noisy endpoints.
+- [ ] Document how to test Telegram alert configuration safely.
+
+### Task 9: Verify the MVP
+
+- [ ] Run `docker compose config`.
+- [ ] If Docker is available, run `docker compose up` long enough to confirm Gatus starts.
+- [ ] Check the status page URL manually or with a local HTTP request if possible.
+- [ ] Review README and docs for consistency with the actual config.
+- [ ] Confirm the final repository state contains only MVP files and no local secrets.
+- [ ] Summarize any verification command that could not be run and why.
