@@ -6,16 +6,16 @@ Reviewed source for additional candidates: https://www.srb.guide/
 
 ## Selected Services
 
-| Service | URL | Group | Reason |
-| --- | --- | --- | --- |
-| eUprava | https://euprava.gov.rs/ | Core e-government | Required initial service; public landing page for Serbian e-government services. |
-| eID.gov.rs | https://eid.gov.rs/ | Identity | Required initial service; public identity portal landing page. |
-| Welcome to Serbia | https://welcometoserbia.gov.rs/ | Immigration | Required initial service; public immigration portal landing page. |
-| ePorezi | https://eporezi.purs.gov.rs/ | Taxes | Required initial service; public tax portal entry point. Authenticated tax account pages are excluded. |
-| APR | https://www.apr.gov.rs/ | Business | Required initial service; public business registry landing page. |
-| LPA | https://lpa.gov.rs/jisportal/homepage | Taxes | Required initial service; public local tax administration homepage. |
-| eKatastar | https://katastar.rgz.gov.rs/eKatastarPublic/ | Property | Required initial service; public real-estate cadastre entry point. |
-| data.gov.rs | https://data.gov.rs/ | Open data | Required initial service; public open-data portal landing page. |
+| Service | URL | Group | URL type | Probe rationale |
+| --- | --- | --- | --- | --- |
+| eUprava | https://euprava.gov.rs/ | Core e-government | Landing page | Required initial service; the landing page is the safest public indicator for the central e-government portal. |
+| eID.gov.rs | https://eid.gov.rs/ | Identity | Landing page | Required initial service; the landing page checks identity portal availability without entering login or registration flows. |
+| Welcome to Serbia | https://welcometoserbia.gov.rs/ | Immigration | Landing page | Required initial service; the landing page is public and avoids immigration application forms or account areas. |
+| ePorezi | https://eporezi.purs.gov.rs/ | Taxes | Landing page | Required initial service; the public entry point is safer than authenticated tax account pages, certificate flows, or message inboxes. |
+| APR | https://www.apr.gov.rs/ | Business | Landing page | Required initial service; the public business registry homepage is safer than online application submission flows. |
+| LPA | https://lpa.gov.rs/jisportal/homepage | Taxes | Public homepage | Required initial service; the public local tax administration homepage avoids taxpayer account or payment workflows. |
+| eKatastar | https://katastar.rgz.gov.rs/eKatastarPublic/ | Property | Public entry point | Required initial service; the public cadastre entry point checks availability without querying private property records. |
+| data.gov.rs | https://data.gov.rs/ | Open data | Landing page | Required initial service; the public open-data portal landing page is a stable availability target. |
 
 No additional SRB.GUIDE candidates were added for the initial MVP. The required services already cover the target groups, and adding marginal or duplicate services would make the first release noisier without improving the core status page.
 

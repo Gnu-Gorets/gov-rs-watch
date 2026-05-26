@@ -58,10 +58,10 @@ Create a small open-source status page for public availability checks of Serbian
 
 ### Task 4: Group services and document URL choices
 
-- [ ] Assign each endpoint to one of the required groups: Identity, Core e-government, Immigration, Taxes, Business, Property, or Open data.
-- [ ] Create `docs/services.md`.
-- [ ] Document each service name, URL, group, and probe rationale.
-- [ ] Note any service where the safest public URL is a landing page rather than a deep endpoint.
+- [x] Assign each endpoint to one of the required groups: Identity, Core e-government, Immigration, Taxes, Business, Property, or Open data.
+- [x] Create `docs/services.md`.
+- [x] Document each service name, URL, group, and probe rationale.
+- [x] Note any service where the safest public URL is a landing page rather than a deep endpoint.
 
 ### Task 5: Add Telegram alerting
 

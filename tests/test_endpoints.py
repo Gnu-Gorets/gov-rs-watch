@@ -17,6 +17,17 @@ REQUIRED_ENDPOINTS = {
     "data.gov.rs": "https://data.gov.rs/",
 }
 
+EXPECTED_GROUPS = {
+    "eUprava": "Core e-government",
+    "eID.gov.rs": "Identity",
+    "Welcome to Serbia": "Immigration",
+    "ePorezi": "Taxes",
+    "APR": "Business",
+    "LPA": "Taxes",
+    "eKatastar": "Property",
+    "data.gov.rs": "Open data",
+}
+
 EXPECTED_TEXT_CONDITIONS = {
     "eUprava": "[BODY] == pat(*eUprava*)",
     "Welcome to Serbia": "[BODY] == pat(*Welcome to Serbia*)",
@@ -46,6 +57,11 @@ def load_endpoint_config():
             in_conditions = False
             continue
 
+        if line.startswith("    group: "):
+            current_endpoint["group"] = line.removeprefix("    group: ")
+            in_conditions = False
+            continue
+
         if line == "    conditions:":
             in_conditions = True
             continue
@@ -69,6 +85,21 @@ class EndpointConfigTest(unittest.TestCase):
         for name, url in REQUIRED_ENDPOINTS.items():
             self.assertIn(name, self.endpoints)
             self.assertEqual(self.endpoints[name]["url"], url)
+
+    def test_required_endpoints_use_required_groups(self):
+        for name, group in EXPECTED_GROUPS.items():
+            with self.subTest(endpoint=name):
+                self.assertEqual(self.endpoints[name]["group"], group)
+
+        self.assertEqual(set(EXPECTED_GROUPS.values()), {
+            "Identity",
+            "Core e-government",
+            "Immigration",
+            "Taxes",
+            "Business",
+            "Property",
+            "Open data",
+        })
 
     def test_each_endpoint_has_status_latency_and_tls_assertions(self):
         for name, endpoint in self.endpoints.items():
@@ -105,6 +136,11 @@ class EndpointConfigTest(unittest.TestCase):
         for name, url in REQUIRED_ENDPOINTS.items():
             self.assertIn(name, services_doc)
             self.assertIn(url, services_doc)
+            self.assertIn(EXPECTED_GROUPS[name], services_doc)
+
+        self.assertIn("URL type", services_doc)
+        self.assertIn("Probe rationale", services_doc)
+        self.assertIn("Landing page", services_doc)
 
         for rejected in (
             "registracija.eid.gov.rs",
