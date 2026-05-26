@@ -57,6 +57,10 @@ endpoints:
     group: Taxes
     url: https://eporezi.purs.gov.rs/
     interval: 10m
+    maintenance-windows:
+      - start: "00:00"
+        duration: 6h
+        timezone: Europe/Belgrade
     conditions:
       - "[STATUS] == 200"
       - "[RESPONSE_TIME] < 7000"
