@@ -80,11 +80,11 @@ Create a small open-source status page for public availability checks of Serbian
 
 ### Task 7: Write README and probe policy docs
 
-- [ ] Write README with project purpose, community-run status, local startup, Telegram setup, service addition workflow, and probe policy summary.
-- [ ] Create `docs/probe-policy.md`.
-- [ ] Explicitly forbid login, form submission, CAPTCHA bypass, private-data access, and high-frequency probing.
-- [ ] Explain how to choose safe public URLs and stable text checks.
-- [ ] Avoid any language implying official government affiliation.
+- [x] Write README with project purpose, community-run status, local startup, Telegram setup, service addition workflow, and probe policy summary.
+- [x] Create `docs/probe-policy.md`.
+- [x] Explicitly forbid login, form submission, CAPTCHA bypass, private-data access, and high-frequency probing.
+- [x] Explain how to choose safe public URLs and stable text checks.
+- [x] Avoid any language implying official government affiliation.
 
 ### Task 8: Add operational runbook
 
