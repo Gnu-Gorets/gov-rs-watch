@@ -65,11 +65,11 @@ Create a small open-source status page for public availability checks of Serbian
 
 ### Task 5: Add Telegram alerting
 
-- [ ] Configure Telegram alerting in Gatus.
-- [ ] Read Telegram token and chat ID from environment variables.
-- [ ] Add `.env.example` or equivalent documentation for required variables.
-- [ ] Ensure no real token, chat ID, or secret is committed.
-- [ ] Document how to enable Telegram alerts locally.
+- [x] Configure Telegram alerting in Gatus.
+- [x] Read Telegram token and chat ID from environment variables.
+- [x] Add `.env.example` or equivalent documentation for required variables.
+- [x] Ensure no real token, chat ID, or secret is committed.
+- [x] Document how to enable Telegram alerts locally.
 
 ### Task 6: Handle ePorezi known maintenance
 

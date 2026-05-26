@@ -7,6 +7,9 @@ services:
       - "${GATUS_PORT:-8080}:8080"
     environment:
       GATUS_CONFIG_PATH: /config/config.yaml
+      TELEGRAM_ALERTS_ENABLED: ${TELEGRAM_ALERTS_ENABLED:-false}
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:-not-configured}
+      TELEGRAM_CHAT_ID: ${TELEGRAM_CHAT_ID:-not-configured}
     volumes:
       - ./config/config.yaml:/config/config.yaml:ro
       - gatus-data:/data

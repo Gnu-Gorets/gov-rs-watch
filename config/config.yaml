@@ -6,6 +6,17 @@ ui:
   title: Serbia Gov Status
   header: Serbia Gov Status
 
+alerting:
+  telegram:
+    token: "${TELEGRAM_BOT_TOKEN}"
+    id: "${TELEGRAM_CHAT_ID}"
+    default-alert:
+      enabled: ${TELEGRAM_ALERTS_ENABLED}
+      failure-threshold: 3
+      success-threshold: 2
+      send-on-resolved: true
+      description: "Public service availability check failed."
+
 endpoints:
   - name: eUprava
     group: Core e-government
@@ -16,6 +27,8 @@ endpoints:
       - "[RESPONSE_TIME] < 5000"
       - "[CERTIFICATE_EXPIRATION] > 168h"
       - "[BODY] == pat(*eUprava*)"
+    alerts:
+      - type: telegram
 
   - name: eID.gov.rs
     group: Identity
@@ -25,6 +38,8 @@ endpoints:
       - "[STATUS] == 200"
       - "[RESPONSE_TIME] < 5000"
       - "[CERTIFICATE_EXPIRATION] > 168h"
+    alerts:
+      - type: telegram
 
   - name: Welcome to Serbia
     group: Immigration
@@ -35,6 +50,8 @@ endpoints:
       - "[RESPONSE_TIME] < 5000"
       - "[CERTIFICATE_EXPIRATION] > 168h"
       - "[BODY] == pat(*Welcome to Serbia*)"
+    alerts:
+      - type: telegram
 
   - name: ePorezi
     group: Taxes
@@ -44,6 +61,8 @@ endpoints:
       - "[STATUS] == 200"
       - "[RESPONSE_TIME] < 7000"
       - "[CERTIFICATE_EXPIRATION] > 168h"
+    alerts:
+      - type: telegram
 
   - name: APR
     group: Business
@@ -53,6 +72,8 @@ endpoints:
       - "[STATUS] == 200"
       - "[RESPONSE_TIME] < 5000"
       - "[CERTIFICATE_EXPIRATION] > 168h"
+    alerts:
+      - type: telegram
 
   - name: LPA
     group: Taxes
@@ -62,6 +83,8 @@ endpoints:
       - "[STATUS] == 200"
       - "[RESPONSE_TIME] < 5000"
       - "[CERTIFICATE_EXPIRATION] > 168h"
+    alerts:
+      - type: telegram
 
   - name: eKatastar
     group: Property
@@ -72,6 +95,8 @@ endpoints:
       - "[RESPONSE_TIME] < 5000"
       - "[CERTIFICATE_EXPIRATION] > 168h"
       - "[BODY] == pat(*eKatastarPublic*)"
+    alerts:
+      - type: telegram
 
   - name: data.gov.rs
     group: Open data
@@ -82,3 +107,5 @@ endpoints:
       - "[RESPONSE_TIME] < 5000"
       - "[CERTIFICATE_EXPIRATION] > 168h"
       - "[BODY] == pat(*DATA.GOV.RS*)"
+    alerts:
+      - type: telegram

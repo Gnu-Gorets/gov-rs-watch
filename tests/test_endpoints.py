@@ -5,6 +5,8 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "config" / "config.yaml"
 SERVICES_DOC = ROOT / "docs" / "services.md"
+COMPOSE = ROOT / "docker-compose.yml"
+ENV_EXAMPLE = ROOT / ".env.example"
 
 REQUIRED_ENDPOINTS = {
     "eUprava": "https://euprava.gov.rs/",
@@ -40,13 +42,15 @@ def load_endpoint_config():
     endpoints = {}
     current_endpoint = None
     in_conditions = False
+    in_alerts = False
 
     for line in CONFIG.read_text(encoding="utf-8").splitlines():
         if line.startswith("  - name: "):
             name = line.removeprefix("  - name: ")
-            current_endpoint = {"name": name, "conditions": []}
+            current_endpoint = {"name": name, "conditions": [], "alerts": []}
             endpoints[name] = current_endpoint
             in_conditions = False
+            in_alerts = False
             continue
 
         if current_endpoint is None:
@@ -55,23 +59,36 @@ def load_endpoint_config():
         if line.startswith("    url: "):
             current_endpoint["url"] = line.removeprefix("    url: ")
             in_conditions = False
+            in_alerts = False
             continue
 
         if line.startswith("    group: "):
             current_endpoint["group"] = line.removeprefix("    group: ")
             in_conditions = False
+            in_alerts = False
             continue
 
         if line == "    conditions:":
             in_conditions = True
+            in_alerts = False
+            continue
+
+        if line == "    alerts:":
+            in_conditions = False
+            in_alerts = True
             continue
 
         if in_conditions and line.startswith('      - "'):
             current_endpoint["conditions"].append(line.strip().removeprefix("- ").strip('"'))
             continue
 
+        if in_alerts and line.startswith("      - type: "):
+            current_endpoint["alerts"].append(line.strip().removeprefix("- type: "))
+            continue
+
         if line and not line.startswith("      "):
             in_conditions = False
+            in_alerts = False
 
     return endpoints
 
@@ -151,6 +168,35 @@ class EndpointConfigTest(unittest.TestCase):
             "PIO and health-card related pages",
         ):
             self.assertIn(rejected, services_doc)
+
+    def test_telegram_alerting_uses_environment_variables(self):
+        config = CONFIG.read_text(encoding="utf-8")
+        compose = COMPOSE.read_text(encoding="utf-8")
+        env_example = ENV_EXAMPLE.read_text(encoding="utf-8")
+
+        self.assertIn("alerting:", config)
+        self.assertIn("telegram:", config)
+        self.assertIn('token: "${TELEGRAM_BOT_TOKEN}"', config)
+        self.assertIn('id: "${TELEGRAM_CHAT_ID}"', config)
+        self.assertIn("enabled: ${TELEGRAM_ALERTS_ENABLED}", config)
+        self.assertIn("failure-threshold: 3", config)
+        self.assertIn("success-threshold: 2", config)
+        self.assertIn("send-on-resolved: true", config)
+
+        for variable in (
+            "TELEGRAM_ALERTS_ENABLED",
+            "TELEGRAM_BOT_TOKEN",
+            "TELEGRAM_CHAT_ID",
+        ):
+            self.assertIn(variable, compose)
+            self.assertIn(variable, env_example)
+
+        self.assertNotRegex(env_example, r"\d{6,}:[A-Za-z0-9_-]{20,}")
+
+    def test_each_endpoint_has_telegram_alert(self):
+        for name, endpoint in self.endpoints.items():
+            with self.subTest(endpoint=name):
+                self.assertEqual(endpoint["alerts"], ["telegram"])
 
 
 if __name__ == "__main__":
