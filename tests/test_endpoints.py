@@ -1,6 +1,5 @@
-from pathlib import Path
 import unittest
-
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "config" / "config.yaml"
@@ -153,15 +152,18 @@ class EndpointConfigTest(unittest.TestCase):
             with self.subTest(endpoint=name):
                 self.assertEqual(self.endpoints[name]["group"], group)
 
-        self.assertEqual(set(EXPECTED_GROUPS.values()), {
-            "Identity",
-            "Core e-government",
-            "Immigration",
-            "Taxes",
-            "Business",
-            "Property",
-            "Open data",
-        })
+        self.assertEqual(
+            set(EXPECTED_GROUPS.values()),
+            {
+                "Identity",
+                "Core e-government",
+                "Immigration",
+                "Taxes",
+                "Business",
+                "Property",
+                "Open data",
+            },
+        )
 
     def test_each_endpoint_has_status_latency_and_tls_assertions(self):
         for name, endpoint in self.endpoints.items():
@@ -170,7 +172,9 @@ class EndpointConfigTest(unittest.TestCase):
 
                 self.assertIn("[STATUS] == 200", conditions)
                 self.assertTrue(
-                    any(condition.startswith("[RESPONSE_TIME] < ") for condition in conditions),
+                    any(
+                        condition.startswith("[RESPONSE_TIME] < ") for condition in conditions
+                    ),
                     conditions,
                 )
                 self.assertIn("[CERTIFICATE_EXPIRATION] > 168h", conditions)
