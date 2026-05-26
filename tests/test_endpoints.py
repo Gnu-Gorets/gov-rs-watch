@@ -5,6 +5,7 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "config" / "config.yaml"
 SERVICES_DOC = ROOT / "docs" / "services.md"
+PROBE_POLICY = ROOT / "docs" / "probe-policy.md"
 COMPOSE = ROOT / "docker-compose.yml"
 ENV_EXAMPLE = ROOT / ".env.example"
 
@@ -266,6 +267,50 @@ class EndpointConfigTest(unittest.TestCase):
             self.assertIn("Europe/Belgrade", text)
 
         self.assertIn("should not be treated as a community outage incident", readme)
+
+    def test_readme_covers_project_usage_and_policy_summary(self):
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        normalized_readme = " ".join(readme.split())
+
+        for expected in (
+            "Community-run public status page",
+            "not affiliated with, endorsed by, or operated by any Serbian government institution",
+            "http://localhost:8080",
+            "docker compose up",
+            "docker compose down",
+            "TELEGRAM_ALERTS_ENABLED",
+            "TELEGRAM_BOT_TOKEN",
+            "TELEGRAM_CHAT_ID",
+            "docs/probe-policy.md",
+            "docs/services.md",
+            "Service Changes",
+            "python -m unittest discover",
+            "docker compose config",
+        ):
+            self.assertIn(expected, normalized_readme)
+
+        for service in REQUIRED_ENDPOINTS:
+            self.assertIn(service, readme)
+
+    def test_probe_policy_documents_safe_public_probing_rules(self):
+        policy = PROBE_POLICY.read_text(encoding="utf-8")
+
+        for expected in (
+            "public availability only",
+            "Public landing pages",
+            "Do not log in",
+            "Do not submit forms",
+            "Do not bypass CAPTCHA",
+            "Do not access private data",
+            "Do not collect personal data",
+            "Do not use high-frequency probing",
+            "Expected-text checks are optional",
+            "Localization changes",
+            "Cookie banners",
+            "community-run project",
+            "must not imply official government affiliation",
+        ):
+            self.assertIn(expected, policy)
 
 
 if __name__ == "__main__":
