@@ -98,9 +98,11 @@ Create a small open-source status page for public availability checks of Serbian
 
 ### Task 9: Verify the MVP
 
-- [ ] Run `docker compose config`.
-- [ ] If Docker is available, run `docker compose up` long enough to confirm Gatus starts.
-- [ ] Check the status page URL manually or with a local HTTP request if possible.
-- [ ] Review README and docs for consistency with the actual config.
-- [ ] Confirm the final repository state contains only MVP files and no local secrets.
-- [ ] Summarize any verification command that could not be run and why.
+- [x] Run `docker compose config`.
+- [x] If Docker is available, run `docker compose up` long enough to confirm Gatus starts.
+- [x] Check the status page URL manually or with a local HTTP request if possible.
+- [x] Review README and docs for consistency with the actual config.
+- [x] Confirm the final repository state contains only MVP files and no local secrets.
+- [x] Summarize any verification command that could not be run and why.
+
+Verification summary: all verification commands were run successfully; no verification commands were skipped.
