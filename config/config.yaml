@@ -1,0 +1,9 @@
+storage:
+  type: sqlite
+  path: /data/gatus.db
+
+ui:
+  title: Serbia Gov Status
+  header: Serbia Gov Status
+
+endpoints: []

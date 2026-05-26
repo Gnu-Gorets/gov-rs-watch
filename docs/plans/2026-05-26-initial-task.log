@@ -30,12 +30,12 @@ Create a small open-source status page for public availability checks of Serbian
 
 ### Task 1: Add the Gatus Docker Compose setup
 
-- [ ] Add `docker-compose.yml` for running Gatus.
-- [ ] Add a Gatus config file, preferably under `config/`.
-- [ ] Mount the config into the Gatus container.
-- [ ] Expose the Gatus web UI on a documented local port.
-- [ ] Keep generated runtime data and local secrets out of Git.
-- [ ] Run `docker compose config` and fix any Compose errors.
+- [x] Add `docker-compose.yml` for running Gatus.
+- [x] Add a Gatus config file, preferably under `config/`.
+- [x] Mount the config into the Gatus container.
+- [x] Expose the Gatus web UI on a documented local port.
+- [x] Keep generated runtime data and local secrets out of Git.
+- [x] Run `docker compose config` and fix any Compose errors.
 
 ### Task 2: Analyze and configure public Serbian government endpoints
 
