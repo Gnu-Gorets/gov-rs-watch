@@ -13,6 +13,9 @@ endpoints:
     interval: 10m
     conditions:
       - "[STATUS] == 200"
+      - "[RESPONSE_TIME] < 5000"
+      - "[CERTIFICATE_EXPIRATION] > 168h"
+      - "[BODY] == pat(*eUprava*)"
 
   - name: eID.gov.rs
     group: Identity
@@ -20,6 +23,8 @@ endpoints:
     interval: 10m
     conditions:
       - "[STATUS] == 200"
+      - "[RESPONSE_TIME] < 5000"
+      - "[CERTIFICATE_EXPIRATION] > 168h"
 
   - name: Welcome to Serbia
     group: Immigration
@@ -27,6 +32,9 @@ endpoints:
     interval: 10m
     conditions:
       - "[STATUS] == 200"
+      - "[RESPONSE_TIME] < 5000"
+      - "[CERTIFICATE_EXPIRATION] > 168h"
+      - "[BODY] == pat(*Welcome to Serbia*)"
 
   - name: ePorezi
     group: Taxes
@@ -34,6 +42,8 @@ endpoints:
     interval: 10m
     conditions:
       - "[STATUS] == 200"
+      - "[RESPONSE_TIME] < 7000"
+      - "[CERTIFICATE_EXPIRATION] > 168h"
 
   - name: APR
     group: Business
@@ -41,6 +51,8 @@ endpoints:
     interval: 10m
     conditions:
       - "[STATUS] == 200"
+      - "[RESPONSE_TIME] < 5000"
+      - "[CERTIFICATE_EXPIRATION] > 168h"
 
   - name: LPA
     group: Taxes
@@ -48,6 +60,8 @@ endpoints:
     interval: 10m
     conditions:
       - "[STATUS] == 200"
+      - "[RESPONSE_TIME] < 5000"
+      - "[CERTIFICATE_EXPIRATION] > 168h"
 
   - name: eKatastar
     group: Property
@@ -55,6 +69,9 @@ endpoints:
     interval: 10m
     conditions:
       - "[STATUS] == 200"
+      - "[RESPONSE_TIME] < 5000"
+      - "[CERTIFICATE_EXPIRATION] > 168h"
+      - "[BODY] == pat(*eKatastarPublic*)"
 
   - name: data.gov.rs
     group: Open data
@@ -62,3 +79,6 @@ endpoints:
     interval: 10m
     conditions:
       - "[STATUS] == 200"
+      - "[RESPONSE_TIME] < 5000"
+      - "[CERTIFICATE_EXPIRATION] > 168h"
+      - "[BODY] == pat(*DATA.GOV.RS*)"

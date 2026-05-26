@@ -50,11 +50,11 @@ Create a small open-source status page for public availability checks of Serbian
 
 ### Task 3: Add probe assertions and thresholds
 
-- [ ] Add HTTP success validation for each endpoint.
-- [ ] Add latency thresholds for each endpoint.
-- [ ] Add TLS certificate expiry checks for HTTPS endpoints where Gatus supports it.
-- [ ] Add expected-text checks only for stable public text.
-- [ ] Remove any text checks that are likely to fail due to localization, redirects, cookie banners, or dynamic content.
+- [x] Add HTTP success validation for each endpoint.
+- [x] Add latency thresholds for each endpoint.
+- [x] Add TLS certificate expiry checks for HTTPS endpoints where Gatus supports it.
+- [x] Add expected-text checks only for stable public text.
+- [x] Remove any text checks that are likely to fail due to localization, redirects, cookie banners, or dynamic content.
 
 ### Task 4: Group services and document URL choices
 
