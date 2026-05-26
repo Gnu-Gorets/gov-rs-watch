@@ -39,14 +39,14 @@ Create a small open-source status page for public availability checks of Serbian
 
 ### Task 2: Analyze and configure public Serbian government endpoints
 
-- [ ] Treat eUprava, eID.gov.rs, Welcome to Serbia, ePorezi, APR, LPA, eKatastar, and data.gov.rs as required initial services.
-- [ ] Review https://www.srb.guide for additional Serbian government or public-service websites that are relevant for a public status page.
-- [ ] Select only candidates that expose safe public landing pages or public health-safe URLs.
-- [ ] Exclude candidates that require login, forms, CAPTCHA, session state, private data, or high-frequency probing.
-- [ ] Document selected and rejected candidates in `docs/services.md` with a short reason.
-- [ ] Add Gatus endpoints for the required initial services.
-- [ ] Add Gatus endpoints for any additional selected candidates from the analysis.
-- [ ] Keep the initial MVP focused; do not add marginal or duplicate services just to increase the endpoint count.
+- [x] Treat eUprava, eID.gov.rs, Welcome to Serbia, ePorezi, APR, LPA, eKatastar, and data.gov.rs as required initial services.
+- [x] Review https://www.srb.guide for additional Serbian government or public-service websites that are relevant for a public status page.
+- [x] Select only candidates that expose safe public landing pages or public health-safe URLs.
+- [x] Exclude candidates that require login, forms, CAPTCHA, session state, private data, or high-frequency probing.
+- [x] Document selected and rejected candidates in `docs/services.md` with a short reason.
+- [x] Add Gatus endpoints for the required initial services.
+- [x] Add Gatus endpoints for any additional selected candidates from the analysis.
+- [x] Keep the initial MVP focused; do not add marginal or duplicate services just to increase the endpoint count.
 
 ### Task 3: Add probe assertions and thresholds
 

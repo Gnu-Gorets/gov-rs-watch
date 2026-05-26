@@ -6,4 +6,59 @@ ui:
   title: Serbia Gov Status
   header: Serbia Gov Status
 
-endpoints: []
+endpoints:
+  - name: eUprava
+    group: Core e-government
+    url: https://euprava.gov.rs/
+    interval: 10m
+    conditions:
+      - "[STATUS] == 200"
+
+  - name: eID.gov.rs
+    group: Identity
+    url: https://eid.gov.rs/
+    interval: 10m
+    conditions:
+      - "[STATUS] == 200"
+
+  - name: Welcome to Serbia
+    group: Immigration
+    url: https://welcometoserbia.gov.rs/
+    interval: 10m
+    conditions:
+      - "[STATUS] == 200"
+
+  - name: ePorezi
+    group: Taxes
+    url: https://eporezi.purs.gov.rs/
+    interval: 10m
+    conditions:
+      - "[STATUS] == 200"
+
+  - name: APR
+    group: Business
+    url: https://www.apr.gov.rs/
+    interval: 10m
+    conditions:
+      - "[STATUS] == 200"
+
+  - name: LPA
+    group: Taxes
+    url: https://lpa.gov.rs/jisportal/homepage
+    interval: 10m
+    conditions:
+      - "[STATUS] == 200"
+
+  - name: eKatastar
+    group: Property
+    url: https://katastar.rgz.gov.rs/eKatastarPublic/
+    interval: 10m
+    conditions:
+      - "[STATUS] == 200"
+
+  - name: data.gov.rs
+    group: Open data
+    url: https://data.gov.rs/
+    interval: 10m
+    conditions:
+      - "[STATUS] == 200"
